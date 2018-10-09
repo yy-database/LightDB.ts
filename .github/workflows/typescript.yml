@@ -1,0 +1,42 @@
+name: CI - TypeScript
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node-version: [24]
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: TypeScript type check
+        run: pnpm --filter "@yydb/light-db" run typecheck
+      - name: Drizzle adapter type check
+        run: pnpm --filter "@lightdb/drizzle-adapter" run typecheck
+      - name: Prisma adapter type check
+        run: pnpm --filter "@prisma/adapter-lightdb" run typecheck
+      - name: Biome format check
+        run: pnpm exec biome format --check projects
+      - name: Biome lint check
+        run: pnpm exec biome lint projects
+      - name: Build packages
+        run: |
+          pnpm --filter "@yydb/light-db" run build
+          pnpm --filter "@lightdb/drizzle-adapter" run build
+          pnpm --filter "@prisma/adapter-lightdb" run build

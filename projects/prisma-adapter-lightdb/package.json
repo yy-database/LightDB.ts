@@ -1,0 +1,53 @@
+{
+    "name": "@yydb/prisma-adapter",
+    "version": "0.1.0",
+    "description": "Prisma driver adapter for LightDB - A high-performance TypeScript database",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "typecheck": "tsc --noEmit",
+        "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+        "prepublishOnly": "pnpm run clean && pnpm run build"
+    },
+    "keywords": [
+        "prisma",
+        "lightdb",
+        "database",
+        "adapter",
+        "driver",
+        "typescript"
+    ],
+    "license": "MPL-2.0",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "dependencies": {
+        "@prisma/driver-adapter-utils": "^6.0.0",
+        "@yydb/light-db": "workspace:*",
+        "@yydb/sql-parser": "link:../../../SQL.ts/projects/sql-parser",
+        "@yydb/sql-ast": "link:../../../SQL.ts/projects/sql-ast"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.0",
+        "typescript": "^5.3.0"
+    },
+    "peerDependencies": {
+        "@prisma/client": "^6.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lightdb/lightdb.git",
+        "directory": "projects/prisma-adapter-lightdb"
+    }
+}

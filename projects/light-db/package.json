@@ -1,0 +1,42 @@
+{
+    "name": "@yydb/light-db",
+    "version": "0.1.0",
+    "description": "LightDB Storage Engine - A high-performance TypeScript database storage layer",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "typecheck": "tsc --noEmit",
+        "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+        "prepublishOnly": "pnpm run clean && pnpm run build",
+        "test": "node --loader ts-node/esm tests/index.ts",
+        "test:unit": "node --loader ts-node/esm tests/index.ts unit",
+        "test:benchmark": "node --loader ts-node/esm tests/index.ts benchmark"
+    },
+    "keywords": [
+        "database",
+        "storage-engine",
+        "wal",
+        "typescript"
+    ],
+    "license": "MPL-2.0",
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "author": "LightDB Team",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yy-database/LightDB.ts.git",
+        "directory": "projects/light-db"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.0",
+        "typescript": "^5.3.0"
+    }
+}

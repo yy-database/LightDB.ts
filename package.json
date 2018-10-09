@@ -1,0 +1,26 @@
+{
+    "name": "lightdb-monorepo",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "build": "pnpm -r run build",
+        "build:core": "pnpm --filter @yydb/light-db run build",
+        "build:prisma": "pnpm --filter @yydb/prisma-adapter run build",
+        "build:drizzle": "pnpm --filter @yydb/drizzle-adapter run build",
+        "typecheck": "pnpm -r run typecheck",
+        "clean": "pnpm -r run clean",
+        "test": "pnpm -r run test",
+        "test:core": "pnpm --filter @yydb/light-db run test",
+        "test:prisma": "pnpm --filter @yydb/prisma-adapter run test",
+        "test:drizzle": "pnpm --filter @yydb/drizzle-adapter run test",
+        "test:benchmark": "pnpm --filter @yydb/light-db run test:benchmark",
+        "bump": "node scripts/bump-version.mjs",
+        "fmt": "biome format --write .",
+        "p": "git push && git push --tags --prune",
+        "reset": "git reset Head~ --soft",
+        "u": "cargo upgrade --workspace"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.8.0"
+    }
+}

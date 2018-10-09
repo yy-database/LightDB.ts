@@ -1,0 +1,55 @@
+{
+    "name": "@yydb/drizzle-adapter",
+    "version": "0.1.0",
+    "description": "Drizzle ORM adapter for LightDB - A high-performance TypeScript database",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "typecheck": "tsc --noEmit",
+        "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+        "prepublishOnly": "pnpm run clean && pnpm run build"
+    },
+    "keywords": [
+        "drizzle",
+        "drizzle-orm",
+        "lightdb",
+        "database",
+        "adapter",
+        "orm",
+        "typescript"
+    ],
+    "license": "MPL-2.0",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "peerDependencies": {
+        "drizzle-orm": ">=0.30.0"
+    },
+    "dependencies": {
+        "@yydb/light-db": "workspace:*",
+        "@yydb/sql-parser": "link:../../../SQL.ts/projects/sql-parser",
+        "@yydb/sql-ast": "link:../../../SQL.ts/projects/sql-ast"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.0",
+        "drizzle-orm": "^0.40.0",
+        "typescript": "^5.3.0"
+    },
+    "author": "LightDB Team",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lightdb/lightdb.git",
+        "directory": "projects/drizzle-adapter-lightdb"
+    }
+}
